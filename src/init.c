@@ -170,7 +170,7 @@ static void display_init(void)
 	for(i=0, pp=(char *)(SCREEN_ADR+1); i<2; i++, pp+=30) {
 		*pp = 0xA4;
 	}
-	cprint(0, 15, "+");
+	cprint(0, 10, "+");
 
 	/* Do reverse video for the bottom display line */
 	for(i=0, pp=(char *)(SCREEN_ADR+1+(24 * 160)); i<80; i++, pp+=2) {
