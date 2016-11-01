@@ -116,7 +116,7 @@ int query_pcbios(void);
 int insertaddress(ulong);
 void printpatn(void);
 void printpatn(void);
-void itoa(char s[], int n); 
+void itoa(char s[], int n);
 void reverse(char *p);
 void serial_console_setup(char *param);
 void serial_echo_init(void);
@@ -164,7 +164,7 @@ void sleep(long sec, int flag, int cpu, int sms);
 void block_move(int iter, int cpu);
 void find_ticks(void);
 void print_err(ulong *adr, ulong good, ulong bad, ulong xor);
-void print_ecc_err(ulong page, ulong offset, int corrected, 
+void print_ecc_err(ulong page, ulong offset, int corrected,
 	unsigned short syndrome, int channel);
 void mem_size(void);
 void adj_mem(void);
@@ -188,6 +188,7 @@ unsigned long page_of(void *ptr);
 ulong correct_tsc(ulong el_org);
 void bit_fade_fill(unsigned long n, int cpu);
 void bit_fade_chk(unsigned long n, int cpu);
+void latency_analysis();
 void rowhammer(int row_max, int *row_cnt, int toggle_max, int cpu);
 void find_ticks_for_pass(void);
 void beep(unsigned int frequency);
@@ -220,7 +221,7 @@ static inline void cache_on(void)
         asm(
 		"push %eax\n\t"
 		"movl %cr0,%eax\n\t"
-    "andl $0x9fffffff,%eax\n\t" /* Clear CD and NW */ 
+    "andl $0x9fffffff,%eax\n\t" /* Clear CD and NW */
     "movl %eax,%cr0\n\t"
 		"pop  %eax\n\t");
 }
