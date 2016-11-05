@@ -14,13 +14,13 @@ CC=gcc
 
 CFLAGS= -Wall -march=i486 -m32 -O0 -fomit-frame-pointer -fno-builtin \
 	-ffreestanding -fPIC $(SMP_FL) -fno-stack-protector -fgnu89-inline
-	
+
 OBJS= head.o reloc.o main.o test.o init.o lib.o patn.o screen_buffer.o \
       config.o cpuid.o linuxbios.o pci.o memsize.o spd.o error.o dmi.o controller.o \
-      smp.o vmem.o random.o
-      
+      smp.o vmem.o random.o libgcc.a
 
-all: clean memtest.bin memtest 
+
+all: clean memtest.bin memtest
 
 # Link it statically once so I know I don't have undefined
 # symbols and then link it dynamically so I have full
@@ -57,10 +57,10 @@ test.o: test.c
 
 random.o: random.c
 	$(CC) -c -Wall -march=i486 -m32 -O3 -fomit-frame-pointer -fno-builtin -ffreestanding random.c
-	
-# rule for build number generation  
+
+# rule for build number generation
 build_number:
-	sh make_buildnum.sh  
+	sh make_buildnum.sh
 
 clean:
 	rm -f *.o *.s *.iso memtest.bin memtest memtest_shared \
@@ -75,6 +75,6 @@ install: all
 
 install-precomp:
 	dd <precomp.bin >$(FDISK) bs=8192
-	
+
 dos: all
 	cat mt86+_loader memtest.bin > memtest.exe

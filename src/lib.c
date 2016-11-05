@@ -878,12 +878,14 @@ void serial_echo_printd(double value) {
         // Handle negative values
         if (value < 0)  {
                 value *= -1;
+                WAIT_FOR_XMITR;
                 serial_echo_outb('-', UART_TX);
         }
         uint64_t a = value;
 
         // Handle zero integer part
         if (a == 0) {
+                WAIT_FOR_XMITR;
                 serial_echo_outb('0', UART_TX);
         }
         else {
@@ -893,18 +895,22 @@ void serial_echo_printd(double value) {
                         i++;
                 }
                 for(j = i-1; j != -1; j--) {
+                        WAIT_FOR_XMITR;
                         serial_echo_outb('0'+digits[j], UART_TX);
                 }
         }
 
+        WAIT_FOR_XMITR;
         serial_echo_outb('.', UART_TX);
 
         // Handle floating part
         double b = value - (uint64_t)value;
         for(int i = 0; i < 5; i++) {
                 b *= 10;
+                WAIT_FOR_XMITR;
                 serial_echo_outb('0'+(int)b%10, UART_TX);
         }
+        WAIT_FOR_XMITR;
         serial_echo_outb(13, UART_TX);
 }
 
