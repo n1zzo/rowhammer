@@ -35,7 +35,7 @@
 #define SERIAL_TTY 0
 
 /* SERIAL_BAUD_RATE - Baud rate for the serial console */
-#define SERIAL_BAUD_RATE 9600
+#define SERIAL_BAUD_RATE 115200
 
 /* SCRN_DEBUG - extra check for SCREEN_BUFFER
  */
