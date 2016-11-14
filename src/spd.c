@@ -78,8 +78,8 @@ unsigned char ich5_smb_read_byte(unsigned char adr, unsigned char cmd)
     __outb(0xff, SMBHSTDAT);
     while(__inb(SMBHSTSTS) & 0x01);		// wait until ready
     __outb(cmd, SMBHSTCMD);
-    __outb((adr << 1) | 0x01, SMBHSTADD);
-    __outb(0x48, SMBHSTCNT);
+    __outb((adr << 1) | 0x01, SMBHSTADD); // send slave address and read mode
+    __outb(0x48, SMBHSTCNT);            // start SMBus command
     rdtsc(l1, h1);
     //cprint(POP2_Y, POP2_X + 16, s + cmd % 8);	// progress bar
     while (!(__inb(SMBHSTSTS) & 0x02)) {	// wait til command finished
@@ -87,7 +87,7 @@ unsigned char ich5_smb_read_byte(unsigned char adr, unsigned char cmd)
 			t = ((h2 - h1) * 0xffffffff + (l2 - l1)) / v->clks_msec;
 			if (t > 10) break;			// break after 10ms
     }
-    return __inb(SMBHSTDAT);
+    return __inb(SMBHSTDAT);            // return retrieved data
 }
 
 static int ich5_read_spd(int dimmadr)
