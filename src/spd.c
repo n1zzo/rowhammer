@@ -404,13 +404,13 @@ void show_spd(void)
     for (j = 0; j < 16; j++) {
 	if (smbcontrollers[index].read_spd(j) == 0) {
 	    dprint(POP2_Y, POP2_X + 15, j, 2, 0);
-    	    for (i = 0; i < 256; i++) {
-		hprint2(2 + POP2_Y + i / 16, 3 + POP2_X + (i % 16) * 3, spd_raw[i], 2);
+    	for (i = 0; i < 256; i++) {
+	        hprint2(2 + POP2_Y + i / 16, 3 + POP2_X + (i % 16) * 3, spd_raw[i], 2);
 	    }
 	    flag = 0;
-    	    while(!flag) {
-		if (get_key()) flag++;
-	    }
+    	while(!get_key());
+	    wait_keyup();
+        while(!get_key());
 	    wait_keyup();
 	}
     }
