@@ -408,9 +408,9 @@ void show_spd(void)
 	        hprint2(2 + POP2_Y + i / 16, 3 + POP2_X + (i % 16) * 3, spd_raw[i], 2);
 	    }
 	    flag = 0;
-    	while(!get_key());
+    	while(!get_key()){};
 	    wait_keyup();
-        while(!get_key());
+        while(!get_key()){};
 	    wait_keyup();
 	}
     }
