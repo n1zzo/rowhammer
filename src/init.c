@@ -178,7 +178,7 @@ static void display_init(void)
 		*pp = 0x71;
 	}
 
-   serial_echo_print("[0m");
+   // serial_echo_print("[0m");
 }
 
 /*
