@@ -78,3 +78,6 @@ install-precomp:
 
 dos: all
 	cat mt86+_loader memtest.bin > memtest.exe
+
+usb: all
+	cp memtest.bin /run/media/nico/7B26-CF28/memtest && sync && sudo umount /dev/sdb1
